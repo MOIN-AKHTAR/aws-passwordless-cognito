@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true, // Automatically format on save
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // Use Prettier as the default formatter
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // Ensure Prettier is used for TypeScript
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // Prettier for TypeScript React (.tsx files)
+  },
+  "prettier.requireConfig": true // Only run Prettier if a config file (like .prettierrc) is present
+}

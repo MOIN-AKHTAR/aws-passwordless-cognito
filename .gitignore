@@ -1,0 +1,8 @@
+node_modules
+logs
+*.log
+.env
+dist
+.cache/
+.yarn/*
+build
