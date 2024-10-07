@@ -25,6 +25,5 @@ exports.handler = async (event) => {
     event.response.challengeName = 'CUSTOM_CHALLENGE';
     console.log('Presenting next challenge.');
   }
-
   return event;
 };
