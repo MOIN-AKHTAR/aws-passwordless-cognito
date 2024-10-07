@@ -14,12 +14,11 @@ exports.handler = async (event) => {
   } else {
     // existing session, user has provided a wrong answer, so we need to
     // give them another chance
-    const previousChallenge = event.request.session.length;
-    const challengeMetadata = previousChallenge?.challengeMetadata;
-
+    const previousChallenge = event.request.session.length-1;
+    const challengeMetadata = event.request.session[previousChallenge]["challengeMetadata"];
     if (challengeMetadata) {
       // challengeMetadata should start with "CODE-", hence index of 5
-      otpCode = challengeMetadata.substring(5);
+      otpCode = challengeMetadata;
     }
   }
 
@@ -38,8 +37,7 @@ exports.handler = async (event) => {
   event.response.privateChallengeParameters = {
     secretLoginCode: otpCode,
   };
-
-  event.response.challengeMetadata = `CODE-${otpCode}`;
+  event.response.challengeMetadata = otpCode;
 
   return event;
 };
@@ -65,7 +63,7 @@ async function sendEmail(emailAddress, otpCode) {
         Data: 'Your one-time login code',
       },
     },
-    Source: 'aiheadshot@yopmail.com',
+    Source: `${process.env.MAIL_FROM}`,
   };
   const command = new SendEmailCommand(commandObj);
 
